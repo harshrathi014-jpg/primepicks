@@ -1,0 +1,1106 @@
+```html
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimePicks Global | Verified International Deals, Tech & SaaS Reviews</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for clean modern look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-brand-600 selection:text-white">
+
+    <!-- Top Mandatory FTC Affiliate Disclosure Bar -->
+    <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 text-center border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30 uppercase tracking-wider">
+                FTC Disclosure
+            </span>
+            <p>
+                As an international affiliate partner (Amazon Associates, Impact, PartnerStack), we earn from qualifying purchases at <strong>zero extra cost to you</strong>.
+            </p>
+        </div>
+    </div>
+
+    <!-- Sticky Navigation Bar -->
+    <header class="sticky top-0 z-40 glass-nav border-b border-slate-200/80 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 gap-4">
+                
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-2.5 shrink-0 group">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-600 to-indigo-700 flex items-center justify-center text-white shadow-md shadow-brand-600/20 group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-globe text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-xl tracking-tight text-slate-900">PrimePicks</span>
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-600 block -mt-1">Global</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Categories -->
+                <nav class="hidden lg:flex items-center space-x-1" id="category-nav">
+                    <button onclick="filterCategory('All')" class="cat-btn active px-3.5 py-2 rounded-lg text-sm font-semibold bg-brand-50 text-brand-700 transition-colors" data-cat="All">All Deals</button>
+                    <button onclick="filterCategory('Tech & Gadgets')" class="cat-btn px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors" data-cat="Tech & Gadgets">Tech & Gadgets</button>
+                    <button onclick="filterCategory('SaaS & AI Tools')" class="cat-btn px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors" data-cat="SaaS & AI Tools">SaaS & AI Tools</button>
+                    <button onclick="filterCategory('Home & Lifestyle')" class="cat-btn px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors" data-cat="Home & Lifestyle">Home & Lifestyle</button>
+                    <button onclick="filterCategory('Fitness')" class="cat-btn px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors" data-cat="Fitness">Fitness</button>
+                </nav>
+
+                <!-- Right Controls: Search, Currency Switcher & Admin Button -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <!-- Nav Search (Hidden on small mobile, shown on md+) -->
+                    <div class="relative hidden md:block w-48 xl:w-64">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                        <input type="text" id="nav-search" onkeyup="handleSearch(this.value)" placeholder="Search deals..." class="w-full pl-8 pr-3 py-1.5 bg-slate-100 border border-transparent focus:border-brand-500 focus:bg-white rounded-lg text-sm outline-none transition-all">
+                    </div>
+
+                    <!-- Global Currency Switcher -->
+                    <div class="relative">
+                        <select id="currency-selector" onchange="changeCurrency(this.value)" aria-label="Select Currency" class="appearance-none bg-slate-100 hover:bg-slate-200/70 text-slate-800 font-semibold text-xs sm:text-sm py-2 pl-3 pr-7 rounded-lg border border-slate-200 cursor-pointer outline-none focus:ring-2 focus:ring-brand-500 transition-all">
+                            <option value="USD">🇺🇸 USD ($)</option>
+                            <option value="EUR">🇪🇺 EUR (€)</option>
+                            <option value="GBP">🇬🇧 GBP (£)</option>
+                            <option value="INR">🇮🇳 INR (₹)</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down text-[10px] text-slate-500 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                    </div>
+
+                    <!-- Affiliate Link Manager Button -->
+                    <button onclick="toggleAdminDrawer()" class="inline-flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-semibold px-3 py-2 rounded-lg shadow-sm transition-all cursor-pointer" title="Manage Your Affiliate Products & Links">
+                        <i class="fa-solid fa-sliders text-brand-400"></i>
+                        <span class="hidden sm:inline">Manage Links</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Category Pills -->
+            <div class="flex lg:hidden items-center gap-2 overflow-x-auto py-2.5 border-t border-slate-100 no-scrollbar">
+                <button onclick="filterCategory('All')" class="cat-btn active shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold bg-brand-600 text-white" data-cat="All">All Deals</button>
+                <button onclick="filterCategory('Tech & Gadgets')" class="cat-btn shrink-0 px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700" data-cat="Tech & Gadgets">Tech & Gadgets</button>
+                <button onclick="filterCategory('SaaS & AI Tools')" class="cat-btn shrink-0 px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700" data-cat="SaaS & AI Tools">SaaS & AI Tools</button>
+                <button onclick="filterCategory('Home & Lifestyle')" class="cat-btn shrink-0 px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700" data-cat="Home & Lifestyle">Home & Lifestyle</button>
+                <button onclick="filterCategory('Fitness')" class="cat-btn shrink-0 px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700" data-cat="Fitness">Fitness</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-brand-950 text-white py-16 sm:py-24">
+        <!-- Subtle Background Pattern -->
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#60a5fa 1px, transparent 1px); background-size: 24px 24px;"></div>
+        
+        <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-brand-200 text-xs sm:text-sm font-medium mb-6">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Updated Daily • Verified Global Discounts & SaaS Offers</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+                Curated Global Tech, Gear & <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-cyan-300">High-ROI Software Deals</span>
+            </h1>
+
+            <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
+                We test, compare, and negotiate exclusive discounts on top-rated products worldwide. Switch your local currency above and save instantly with verified partner links.
+            </p>
+
+            <!-- Hero Search Bar -->
+            <div class="max-w-2xl mx-auto mb-8">
+                <div class="flex flex-col sm:flex-row gap-2 bg-white p-2 rounded-2xl shadow-2xl shadow-black/30">
+                    <div class="relative flex-1 flex items-center">
+                        <i class="fa-solid fa-search text-slate-400 ml-3.5 mr-2.5"></i>
+                        <input type="text" id="hero-search" onkeyup="handleSearch(this.value)" placeholder="Search headphones, AI tools, standing desks, VPNs..." class="w-full py-2.5 pr-4 text-slate-900 placeholder-slate-400 text-sm sm:text-base outline-none bg-transparent">
+                    </div>
+                    <a href="#featured-deals" class="bg-brand-600 hover:bg-brand-700 text-white font-bold px-6 py-3 rounded-xl text-sm sm:text-base transition-all flex items-center justify-center gap-2 shrink-0 shadow-md shadow-brand-600/25">
+                        <span>Top Deals of the Week</span>
+                        <i class="fa-solid fa-arrow-down text-xs"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs sm:text-sm text-slate-400 pt-2">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-shield-check text-emerald-400 text-base"></i>
+                    <span>100% Verified Official Merchants</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-globe text-brand-400 text-base"></i>
+                    <span>US, UK, EU & Global Shipping Support</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-tags text-amber-400 text-base"></i>
+                    <span>Exclusive Partner Promo Codes</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-20">
+
+        <!-- Section 1: Featured Affiliate Product Cards -->
+        <section id="featured-deals" class="scroll-mt-24">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 text-brand-600 font-bold text-xs uppercase tracking-wider mb-1">
+                        <i class="fa-solid fa-fire"></i>
+                        <span>Editor's Choice</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight" id="section-heading">
+                        Featured International Deals
+                    </h2>
+                </div>
+                <div class="flex items-center gap-3 text-sm text-slate-500">
+                    <span id="product-count" class="font-semibold text-slate-700">Showing 6 products</span>
+                    <span>•</span>
+                    <button onclick="resetFilters()" class="text-brand-600 hover:underline font-medium">Reset Filters</button>
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Cards dynamically injected via JavaScript -->
+            </div>
+
+            <!-- Empty Search State -->
+            <div id="empty-state" class="hidden text-center py-16 bg-white rounded-2xl border border-slate-200">
+                <div class="w-14 h-14 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-4 text-xl">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-1">No matching deals found</h3>
+                <p class="text-slate-500 text-sm mb-4">Try adjusting your search keywords or switching back to all categories.</p>
+                <button onclick="resetFilters()" class="px-4 py-2 bg-brand-600 text-white text-sm font-semibold rounded-lg hover:bg-brand-700 transition-colors">
+                    Show All Deals
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 2: Top SaaS & Digital Tools Comparison Table (High-Ticket Recurring Commissions) -->
+        <section id="saas-comparison" class="scroll-mt-24">
+            <div class="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden">
+                <div class="p-6 sm:p-8 bg-gradient-to-r from-slate-900 to-slate-800 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <span class="inline-block px-3 py-1 rounded-full bg-brand-500/20 text-brand-300 border border-brand-400/30 text-xs font-bold uppercase tracking-wider mb-2">
+                            High-Value Software & Cloud
+                        </span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Top SaaS & AI Tools Comparison</h2>
+                        <p class="text-slate-300 text-sm mt-1">Globally accessible digital tools with instant activation, free trials, and exclusive partner discounts.</p>
+                    </div>
+                    <div class="text-xs text-slate-300 bg-white/10 px-4 py-2.5 rounded-xl border border-white/10 shrink-0">
+                        <i class="fa-solid fa-circle-info text-brand-400 mr-1.5"></i>
+                        Prices auto-converted to <strong class="current-currency-label text-white">USD ($)</strong>
+                    </div>
+                </div>
+
+                <!-- Responsive Comparison Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-500">
+                                <th class="py-4 px-6">Platform / Tool</th>
+                                <th class="py-4 px-6">Category & Best For</th>
+                                <th class="py-4 px-6">Key Features</th>
+                                <th class="py-4 px-6">Free Trial / Guarantee</th>
+                                <th class="py-4 px-6">Starting Price</th>
+                                <th class="py-4 px-6 text-right">Partner Offer</th>
+                            </tr>
+                        </thead>
+                        <tbody id="saas-table-body" class="divide-y divide-slate-200 text-sm">
+                            <!-- SaaS rows dynamically rendered for currency conversion -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Why Trust PrimePicks Global (Value Proposition for International Visitors) -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                <div class="w-11 h-11 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center text-lg mb-4">
+                    <i class="fa-solid fa-earth-americas"></i>
+                </div>
+                <h3 class="font-bold text-lg text-slate-900 mb-2">Geo-Smart Store Routing</h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                    Whether you shop from the US, UK, Europe, Canada, or India, our smart affiliate links route you to the official regional storefront with local warranty.
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                <div class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg mb-4">
+                    <i class="fa-solid fa-magnifying-glass-dollar"></i>
+                </div>
+                <h3 class="font-bold text-lg text-slate-900 mb-2">Real Price-Drop Verification</h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                    We track 90-day price histories across Amazon, Impact, and direct brand stores to ensure every discount badge reflects genuine savings.
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                <div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-lg mb-4">
+                    <i class="fa-solid fa-handshake-angle"></i>
+                </div>
+                <h3 class="font-bold text-lg text-slate-900 mb-2">100% Reader-Supported</h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                    We never accept paid placements to alter review scores. When you buy through our links, merchants pay us a small referral fee at zero cost to you.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer with Mandatory FTC Disclosure & Quick Admin Access -->
+    <footer class="bg-slate-900 text-slate-300 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-slate-800">
+                <div class="md:col-span-2 space-y-4">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <span class="font-extrabold text-xl text-white">PrimePicks Global</span>
+                    </div>
+                    <p class="text-sm text-slate-400 max-w-md leading-relaxed">
+                        Your trusted international guide to high-value tech gadgets, productivity SaaS, and everyday essentials. Curated independently for smart global shoppers.
+                    </p>
+                    <button onclick="toggleAdminDrawer()" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-brand-400 text-xs font-semibold border border-slate-700 transition-colors cursor-pointer">
+                        <i class="fa-solid fa-plus-circle"></i>
+                        <span>Admin: Add / Manage Affiliate Links</span>
+                    </button>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Categories</h4>
+                    <ul class="space-y-2.5 text-sm text-slate-400">
+                        <li><a href="#featured-deals" onclick="filterCategory('Tech & Gadgets')" class="hover:text-white transition-colors">Tech & Gadgets</a></li>
+                        <li><a href="#featured-deals" onclick="filterCategory('SaaS & AI Tools')" class="hover:text-white transition-colors">SaaS & AI Tools</a></li>
+                        <li><a href="#featured-deals" onclick="filterCategory('Home & Lifestyle')" class="hover:text-white transition-colors">Home & Lifestyle</a></li>
+                        <li><a href="#featured-deals" onclick="filterCategory('Fitness')" class="hover:text-white transition-colors">Fitness & Wellness</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Affiliate Networks</h4>
+                    <ul class="space-y-2.5 text-sm text-slate-400">
+                        <li><i class="fa-brands fa-amazon text-slate-500 mr-2"></i>Amazon Associates (US/UK/EU/IN)</li>
+                        <li><i class="fa-solid fa-link text-slate-500 mr-2"></i>Impact & PartnerStack</li>
+                        <li><i class="fa-solid fa-bag-shopping text-slate-500 mr-2"></i>ShareASale & CJ Affiliate</li>
+                        <li><i class="fa-solid fa-bolt text-slate-500 mr-2"></i>ClickBank Digital Offers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Full Legal FTC Compliance Notice -->
+            <div class="pt-8 space-y-4 text-xs text-slate-400 leading-relaxed">
+                <div class="p-4 rounded-xl bg-slate-800/70 border border-slate-700/80 text-slate-300">
+                    <strong class="text-white">FTC Affiliate Disclosure:</strong> PrimePicks Global is a participant in the Amazon Services LLC Associates Program, Impact Radius, PartnerStack, ShareASale, and other international affiliate advertising programs designed to provide a means for sites to earn advertising fees by advertising and linking to verified merchant websites. <em>Disclosure: As an affiliate, we earn from qualifying purchases at no extra cost to you.</em>
+                </div>
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+                    <p>&copy; 2026 PrimePicks Global Media. All rights reserved.</p>
+                    <div class="flex items-center gap-6">
+                        <a href="#featured-deals" class="hover:text-white">Privacy Policy</a>
+                        <a href="#featured-deals" class="hover:text-white">Affiliate Disclosure</a>
+                        <a href="#featured-deals" class="hover:text-white">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===================================================================== -->
+    <!-- MODAL 1: Sleek Affiliate Redirect & Tracking Simulation Modal         -->
+    <!-- ===================================================================== -->
+    <div id="redirect-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 transform transition-all">
+            <div class="flex items-center justify-between mb-5">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200">
+                    <i class="fa-solid fa-lock"></i> Verified Partner Redirect
+                </span>
+                <button onclick="closeRedirectModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center text-3xl mx-auto mb-4 shadow-inner" id="modal-icon">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                </div>
+                <h3 class="text-xl font-extrabold text-slate-900 mb-1" id="modal-product-title">Product Title</h3>
+                <p class="text-sm text-slate-500">Activating your exclusive international partner discount...</p>
+            </div>
+
+            <!-- Affiliate Tracking Details Box -->
+            <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 space-y-3 mb-6 text-xs">
+                <div class="flex items-center justify-between">
+                    <span class="text-slate-500 font-medium">Affiliate Network:</span>
+                    <span class="font-bold text-slate-800" id="modal-network">Amazon Associates Global</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-slate-500 font-medium">Applied Deal Price:</span>
+                    <span class="font-bold text-emerald-600 text-sm" id="modal-price">$199.00</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-slate-500 font-medium">Geo-Routing Region:</span>
+                    <span class="font-semibold text-slate-700" id="modal-region">International (Auto-Detected)</span>
+                </div>
+                <div class="pt-2 border-t border-slate-200">
+                    <span class="text-slate-500 font-medium block mb-1">Destination Affiliate URL Structure:</span>
+                    <div class="flex items-center gap-2 bg-white p-2 rounded-lg border border-slate-200 font-mono text-[11px] text-brand-700 overflow-x-auto">
+                        <span id="modal-affiliate-url" class="truncate">https://amazon.com/dp/B09XS7JWHH?tag=primepicks-20</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bar Simulation -->
+            <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden mb-5">
+                <div id="redirect-progress" class="bg-brand-600 h-full w-0 transition-all duration-1000 ease-out"></div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3">
+                <a id="modal-direct-link" href="#" target="_blank" rel="nofollow sponsored noopener" class="flex-1 bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 px-5 rounded-xl text-sm text-center shadow-lg shadow-brand-600/25 transition-all flex items-center justify-center gap-2">
+                    <span>Continue to Merchant Store</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </a>
+                <button onclick="copyAffiliateLink()" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-sm transition-colors flex items-center justify-center gap-1.5" title="Copy Tracking Link">
+                    <i class="fa-regular fa-copy"></i>
+                    <span id="copy-btn-text">Copy Link</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- MODAL / DRAWER 2: Admin / Affiliate Link Manager (Saved in localStorage) -->
+    <!-- ===================================================================== -->
+    <div id="admin-drawer" class="fixed inset-0 z-50 hidden justify-end bg-slate-900/60 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-xl h-full overflow-y-auto shadow-2xl p-6 sm:p-8 flex flex-col justify-between">
+            <div>
+                <!-- Drawer Header -->
+                <div class="flex items-center justify-between pb-5 border-b border-slate-200 mb-6">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-brand-600">Site Owner Dashboard</span>
+                        <h3 class="text-xl font-extrabold text-slate-900">Affiliate Link Manager</h3>
+                    </div>
+                    <button onclick="toggleAdminDrawer()" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Add New Affiliate Product Form -->
+                <form id="add-product-form" onsubmit="handleAddProduct(event)" class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4 mb-8">
+                    <h4 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-plus-circle text-brand-600"></i>
+                        <span>Add New International Affiliate Product</span>
+                    </h4>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Product Name *</label>
+                            <input type="text" id="prod-name" required placeholder="e.g., Apple AirPods Pro 2" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm outline-none focus:border-brand-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Category *</label>
+                            <select id="prod-category" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm outline-none focus:border-brand-500">
+                                <option value="Tech & Gadgets">Tech & Gadgets</option>
+                                <option value="SaaS & AI Tools">SaaS & AI Tools</option>
+                                <option value="Home & Lifestyle">Home & Lifestyle</option>
+                                <option value="Fitness">Fitness</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Sale Price (USD $) *</label>
+                            <input type="number" step="0.01" id="prod-price" required placeholder="189.00" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm outline-none focus:border-brand-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Original Price ($)</label>
+                            <input type="number" step="0.01" id="prod-orig-price" placeholder="249.00" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm outline-none focus:border-brand-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Affiliate Network</label>
+                            <select id="prod-network" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm outline-none focus:border-brand-500">
+                                <option value="Amazon Associates">Amazon Associates</option>
+                                <option value="Impact">Impact</option>
+                                <option value="PartnerStack">PartnerStack</option>
+                                <option value="ClickBank">ClickBank</option>
+                                <option value="ShareASale">ShareASale</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Your Affiliate Tracking URL *</label>
+                        <input type="url" id="prod-url" required placeholder="https://www.amazon.com/dp/PRODUCTID?tag=yourtag-20" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm outline-none focus:border-brand-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Key Highlights (Comma separated)</label>
+                        <input type="text" id="prod-highlights" placeholder="Active Noise Cancellation, USB-C Case, Global Warranty" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm outline-none focus:border-brand-500">
+                    </div>
+
+                    <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-2.5 px-4 rounded-xl text-sm shadow-md transition-all cursor-pointer">
+                        Save & Publish Deal Live
+                    </button>
+                </form>
+
+                <!-- Active Affiliate Products List -->
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-bold text-sm text-slate-900">Active Affiliate Listings (<span id="admin-count">0</span>)</h4>
+                        <button onclick="resetDefaultProducts()" class="text-xs text-rose-600 hover:underline font-medium">Restore Default Demo Data</button>
+                    </div>
+                    <div id="admin-product-list" class="space-y-2.5 max-h-72 overflow-y-auto pr-1">
+                        <!-- Managed items injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-5 border-t border-slate-200 mt-6 text-xs text-slate-500 flex items-center justify-between">
+                <span><i class="fa-solid fa-database text-emerald-500 mr-1"></i> Auto-saved in browser localStorage</span>
+                <button onclick="toggleAdminDrawer()" class="px-4 py-2 bg-slate-900 text-white font-semibold rounded-lg">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 hidden items-center gap-2.5 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-xl border border-slate-700 text-sm font-medium">
+        <i class="fa-solid fa-circle-check text-emerald-400"></i>
+        <span id="toast-message">Action completed!</span>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- JAVASCRIPT: State Management, Currency Converter, Search & Link Admin -->
+    <!-- ===================================================================== -->
+    <script>
+        // 1. Exchange Rates relative to 1 USD (Realistic International Conversion)
+        const CURRENCY_CONFIG = {
+            USD: { symbol: '$', rate: 1, label: 'USD ($)', region: 'United States / Global' },
+            EUR: { symbol: '€', rate: 0.92, label: 'EUR (€)', region: 'European Union' },
+            GBP: { symbol: '£', rate: 0.79, label: 'GBP (£)', region: 'United Kingdom' },
+            INR: { symbol: '₹', rate: 84.50, label: 'INR (₹)', region: 'India / South Asia' }
+        };
+
+        let currentCurrency = 'USD';
+        let currentCategory = 'All';
+        let currentSearchQuery = '';
+
+        // 2. Default Curated International Affiliate Products (Stored in USD base)
+        const DEFAULT_PRODUCTS = [
+            {
+                id: 'prod-1',
+                name: 'Sony WH-1000XM5 Wireless ANC Headphones',
+                category: 'Tech & Gadgets',
+                priceUSD: 328.00,
+                origPriceUSD: 399.99,
+                rating: 4.9,
+                reviews: 14820,
+                network: 'Amazon Associates',
+                affiliateUrl: 'https://www.amazon.com/dp/B09XS7JWHH?tag=primepicksglobal-20',
+                icon: 'fa-headphones',
+                badge: '18% OFF • Global Bestseller',
+                highlights: ['Industry-leading Noise Cancellation', '30-Hour Battery + Quick Charge', 'Crystal-clear 8-Mic Hands-Free Calling']
+            },
+            {
+                id: 'prod-2',
+                name: 'Jasper AI — Enterprise AI Content & Copywriting Suite',
+                category: 'SaaS & AI Tools',
+                priceUSD: 39.00,
+                origPriceUSD: 49.00,
+                rating: 4.8,
+                reviews: 6450,
+                network: 'PartnerStack',
+                affiliateUrl: 'https://www.jasper.ai/?fpr=primepicks-global',
+                icon: 'fa-wand-magic-sparkles',
+                badge: '20% OFF + 7-Day Free Trial',
+                highlights: ['30+ Languages for Global Marketing', 'SEO Mode & Brand Voice Memory', '30% Recurring Partner Deal']
+            },
+            {
+                id: 'prod-3',
+                name: 'FlexiSpot E7 Pro Electric Standing Desk Frame',
+                category: 'Home & Lifestyle',
+                priceUSD: 379.99,
+                origPriceUSD: 499.99,
+                rating: 4.9,
+                reviews: 8920,
+                network: 'Impact',
+                affiliateUrl: 'https://www.flexispot.com/e7-pro?utm_source=impact&aff=primepicks',
+                icon: 'fa-chair',
+                badge: 'Save $120 • US/UK/EU Stock',
+                highlights: ['Dual-Motor 355 lbs Weight Capacity', 'Whisper-Quiet Height Memory Keypad', '15-Year International Frame Warranty']
+            },
+            {
+                id: 'prod-4',
+                name: 'Garmin Forerunner 265 GPS AMOLED Running Smartwatch',
+                category: 'Fitness',
+                priceUSD: 399.99,
+                origPriceUSD: 449.99,
+                rating: 4.8,
+                reviews: 5130,
+                network: 'Amazon Associates',
+                affiliateUrl: 'https://www.amazon.com/dp/B0BS1T9945?tag=primepicksglobal-20',
+                icon: 'fa-heart-pulse',
+                badge: 'Top Rated Fitness Gear',
+                highlights: ['Bright AMOLED Touchscreen Display', 'Multi-Band GPS & Training Readiness', 'Up to 13 Days Smartwatch Battery']
+            },
+            {
+                id: 'prod-5',
+                name: 'Keychron Q1 Pro QMK/VIA Wireless Custom Mechanical Keyboard',
+                category: 'Tech & Gadgets',
+                priceUSD: 179.00,
+                origPriceUSD: 219.00,
+                rating: 4.9,
+                reviews: 3290,
+                network: 'ShareASale',
+                affiliateUrl: 'https://www.keychron.com/products/keychron-q1-pro?ref=primepicks',
+                icon: 'fa-keyboard',
+                badge: 'Editor’s Choice',
+                highlights: ['Full CNC Machined Aluminum Body', 'Mac & Windows Layout Included', 'Hot-Swappable Tactile Switches']
+            },
+            {
+                id: 'prod-6',
+                name: 'Theragun Prime Percussive Therapy Deep Tissue Massager',
+                category: 'Fitness',
+                priceUSD: 249.00,
+                origPriceUSD: 299.00,
+                rating: 4.7,
+                reviews: 9410,
+                network: 'Impact',
+                affiliateUrl: 'https://www.therabody.com/theragun-prime?irclickid=primepicks',
+                icon: 'fa-dumbbell',
+                badge: '$50 Instant Rebate',
+                highlights: ['16mm Deep Muscle Recovery Amplitude', 'Smart App-Guided Routines via Bluetooth', '110-240V Universal Global Charger']
+            }
+        ];
+
+        // 3. High-Ticket International SaaS Comparison Data
+        const SAAS_TOOLS = [
+            {
+                name: 'NordVPN Global',
+                tagline: 'Fastest Worldwide Security & Geo-Unblocking',
+                category: 'Cybersecurity & Privacy',
+                features: '6,400+ servers in 111 countries, Threat Protection Pro, 10 devices',
+                trial: '30-Day Money-Back Guarantee',
+                priceUSD: 3.39,
+                billing: '/mo',
+                network: 'Impact',
+                url: 'https://nordvpn.com/special/?aff=primepicksglobal',
+                icon: 'fa-shield-halved',
+                badge: '72% OFF + 3 Mos Free'
+            },
+            {
+                name: 'Hostinger Cloud Hosting',
+                tagline: 'High-Speed NVMe Global Web Hosting',
+                category: 'Web Hosting & Domains',
+                features: 'Free Domain, Free SSL, Worldwide CDN, AI Website Builder',
+                trial: '30-Day Risk-Free Trial',
+                priceUSD: 2.99,
+                billing: '/mo',
+                network: 'Impact',
+                url: 'https://www.hostinger.com/?REFERRALCODE=PRIMEPICKS',
+                icon: 'fa-server',
+                badge: 'Best Value Globally'
+            },
+            {
+                name: 'Semrush Pro SEO Suite',
+                tagline: 'All-in-One International SEO & Competitor Analytics',
+                category: 'Digital Marketing SaaS',
+                features: 'Keyword Magic Tool, Backlink Audit, Global Rank Tracking',
+                trial: '14-Day Exclusive Free Trial',
+                priceUSD: 139.95,
+                billing: '/mo',
+                network: 'Impact',
+                url: 'https://www.semrush.com/lp/free-trial/?ref=primepicks',
+                icon: 'fa-chart-line',
+                badge: 'Exclusive 14-Day Trial'
+            },
+            {
+                name: 'ElevenLabs AI Voice',
+                tagline: 'Realistic Multilingual AI Voice & Dubbing Studio',
+                category: 'AI Audio & Creators',
+                features: '29 Languages, Voice Cloning, Commercial Studio Rights',
+                trial: 'Free Forever Starter Tier',
+                priceUSD: 5.00,
+                billing: '/mo',
+                network: 'PartnerStack',
+                url: 'https://elevenlabs.io/?from=primepicksglobal',
+                icon: 'fa-microphone-lines',
+                badge: '80% OFF First Month'
+            }
+        ];
+
+        // Load products from localStorage or fallback to defaults
+        let products = [];
+        try {
+            const saved = localStorage.getItem('primepicks_affiliate_products');
+            products = saved ? JSON.parse(saved) : [...DEFAULT_PRODUCTS];
+        } catch (e) {
+            products = [...DEFAULT_PRODUCTS];
+        }
+
+        // Helper: Format USD amount into currently selected currency
+        function formatPrice(usdAmount) {
+            const config = CURRENCY_CONFIG[currentCurrency];
+            const converted = usdAmount * config.rate;
+            if (currentCurrency === 'INR') {
+                return config.symbol + Math.round(converted).toLocaleString('en-IN');
+            }
+            return config.symbol + converted.toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
+        // Render Featured Affiliate Product Cards
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            const emptyState = document.getElementById('empty-state');
+            const countLabel = document.getElementById('product-count');
+
+            const filtered = products.filter(item => {
+                const matchesCategory = currentCategory === 'All' || item.category === currentCategory;
+                const q = currentSearchQuery.toLowerCase().trim();
+                const matchesSearch = !q ||
+                    item.name.toLowerCase().includes(q) ||
+                    item.category.toLowerCase().includes(q) ||
+                    item.highlights.some(h => h.toLowerCase().includes(q));
+                return matchesCategory && matchesSearch;
+            });
+
+            countLabel.textContent = `Showing ${filtered.length} ${filtered.length === 1 ? 'deal' : 'deals'}`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.innerHTML = filtered.map(product => {
+                const discountPercent = product.origPriceUSD && product.origPriceUSD > product.priceUSD
+                    ? Math.round(((product.origPriceUSD - product.priceUSD) / product.origPriceUSD) * 100)
+                    : 0;
+
+                return `
+                <article class="group bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-brand-300 transition-all duration-300 flex flex-col justify-between overflow-hidden">
+                    <div>
+                        <!-- Product Visual Header / Placeholder -->
+                        <div class="relative h-48 bg-gradient-to-br from-slate-100 via-slate-50 to-brand-50/60 flex items-center justify-center p-6 border-b border-slate-100">
+                            <!-- Discount / Deal Badge -->
+                            <span class="absolute top-3.5 left-3.5 px-2.5 py-1 rounded-lg bg-rose-600 text-white text-[11px] font-bold tracking-wide shadow-sm">
+                                ${product.badge || (discountPercent > 0 ? discountPercent + '% OFF' : 'Verified Deal')}
+                            </span>
+
+                            <!-- Category Tag -->
+                            <span class="absolute top-3.5 right-3.5 px-2.5 py-1 rounded-lg bg-white/90 backdrop-blur text-slate-600 text-[11px] font-semibold border border-slate-200/80">
+                                ${product.category}
+                            </span>
+
+                            <!-- Stylish Product Icon Showcase -->
+                            <div class="w-20 h-20 rounded-2xl bg-white shadow-md border border-slate-100 flex items-center justify-center text-brand-600 text-3xl group-hover:scale-110 transition-transform duration-300">
+                                <i class="fa-solid ${product.icon || 'fa-box-open'}"></i>
+                            </div>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="p-6">
+                            <!-- Rating & Merchant Network -->
+                            <div class="flex items-center justify-between text-xs mb-2.5">
+                                <div class="flex items-center gap-1 text-amber-500 font-bold">
+                                    <i class="fa-solid fa-star"></i>
+                                    <span class="text-slate-800">${product.rating}</span>
+                                    <span class="text-slate-400 font-normal">(${product.reviews.toLocaleString()} reviews)</span>
+                                </div>
+                                <span class="text-slate-400 font-medium flex items-center gap-1">
+                                    <i class="fa-solid fa-circle-check text-emerald-500 text-[10px]"></i>
+                                    ${product.network}
+                                </span>
+                            </div>
+
+                            <!-- Title -->
+                            <h3 class="font-bold text-lg text-slate-900 leading-snug mb-3 group-hover:text-brand-600 transition-colors">
+                                ${product.name}
+                            </h3>
+
+                            <!-- Key Pros / Highlights -->
+                            <ul class="space-y-1.5 mb-5">
+                                ${product.highlights.map(point => `
+                                    <li class="flex items-start gap-2 text-xs text-slate-600">
+                                        <i class="fa-solid fa-check text-emerald-500 mt-0.5 shrink-0"></i>
+                                        <span>${point}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer: Dynamic Price & High-Converting Affiliate CTA -->
+                    <div class="px-6 pb-6 pt-3 border-t border-slate-100 bg-slate-50/50">
+                        <div class="flex items-baseline justify-between mb-3.5">
+                            <div>
+                                <span class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold block">Best Global Price</span>
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-2xl font-extrabold text-slate-900">${formatPrice(product.priceUSD)}</span>
+                                    ${product.origPriceUSD ? `<span class="text-xs text-slate-400 line-through">${formatPrice(product.origPriceUSD)}</span>` : ''}
+                                </div>
+                            </div>
+                            <span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                                In Stock
+                            </span>
+                        </div>
+
+                        <button onclick="openRedirectModal('${product.id}')" class="w-full py-3 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-[0.99] text-white font-bold text-sm shadow-md shadow-brand-600/20 transition-all flex items-center justify-center gap-2 cursor-pointer">
+                            <span>Check Best Price / Buy Now</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </button>
+                    </div>
+                </article>
+                `;
+            }).join('');
+        }
+
+        // Render Top SaaS & Digital Tools Comparison Table
+        function renderSaasTable() {
+            const tbody = document.getElementById('saas-table-body');
+            tbody.innerHTML = SAAS_TOOLS.map((tool, index) => `
+                <tr class="hover:bg-slate-50/90 transition-colors">
+                    <td class="py-4 px-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center text-base shrink-0 border border-brand-100">
+                                <i class="fa-solid ${tool.icon}"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-slate-900">${tool.name}</div>
+                                <span class="inline-block mt-0.5 px-2 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-bold">
+                                    ${tool.badge}
+                                </span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="py-4 px-6">
+                        <div class="font-semibold text-slate-800">${tool.category}</div>
+                        <div class="text-xs text-slate-500">${tool.tagline}</div>
+                    </td>
+                    <td class="py-4 px-6 text-xs text-slate-600 max-w-xs">
+                        ${tool.features}
+                    </td>
+                    <td class="py-4 px-6">
+                        <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
+                            <i class="fa-solid fa-circle-check"></i>
+                            ${tool.trial}
+                        </span>
+                    </td>
+                    <td class="py-4 px-6 whitespace-nowrap">
+                        <span class="text-lg font-extrabold text-slate-900">${formatPrice(tool.priceUSD)}</span>
+                        <span class="text-xs text-slate-500">${tool.billing}</span>
+                    </td>
+                    <td class="py-4 px-6 text-right whitespace-nowrap">
+                        <button onclick="openSaasModal(${index})" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-brand-600 text-white font-bold text-xs transition-colors shadow-sm cursor-pointer">
+                            <span>Claim Offer</span>
+                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Currency Switcher Handler
+        function changeCurrency(currencyCode) {
+            currentCurrency = currencyCode;
+            document.querySelectorAll('.current-currency-label').forEach(el => {
+                el.textContent = CURRENCY_CONFIG[currencyCode].label;
+            });
+            renderProducts();
+            renderSaasTable();
+            showToast(`Prices updated to ${CURRENCY_CONFIG[currencyCode].label}`);
+        }
+
+        // Category Filter Handler
+        function filterCategory(category) {
+            currentCategory = category;
+            document.getElementById('section-heading').textContent =
+                category === 'All' ? 'Featured International Deals' : `${category} — Top Global Picks`;
+
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                const isSelected = btn.getAttribute('data-cat') === category;
+                if (btn.classList.contains('rounded-full')) {
+                    // Mobile pill
+                    btn.className = isSelected
+                        ? 'cat-btn active shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold bg-brand-600 text-white'
+                        : 'cat-btn shrink-0 px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700';
+                } else {
+                    // Desktop nav tab
+                    btn.className = isSelected
+                        ? 'cat-btn active px-3.5 py-2 rounded-lg text-sm font-semibold bg-brand-50 text-brand-700 transition-colors'
+                        : 'cat-btn px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors';
+                }
+            });
+
+            renderProducts();
+        }
+
+        // Search Handler (Syncs Hero & Nav search inputs)
+        function handleSearch(value) {
+            currentSearchQuery = value;
+            const navSearch = document.getElementById('nav-search');
+            const heroSearch = document.getElementById('hero-search');
+            if (navSearch && navSearch.value !== value) navSearch.value = value;
+            if (heroSearch && heroSearch.value !== value) heroSearch.value = value;
+            renderProducts();
+        }
+
+        function resetFilters() {
+            currentSearchQuery = '';
+            document.getElementById('nav-search').value = '';
+            document.getElementById('hero-search').value = '';
+            filterCategory('All');
+        }
+
+        // Affiliate Redirect & Tracking Simulation Modal
+        function openRedirectModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            populateAndShowModal({
+                title: product.name,
+                network: product.network,
+                priceFormatted: formatPrice(product.priceUSD),
+                url: product.affiliateUrl,
+                icon: product.icon || 'fa-bag-shopping'
+            });
+        }
+
+        function openSaasModal(index) {
+            const tool = SAAS_TOOLS[index];
+            if (!tool) return;
+
+            populateAndShowModal({
+                title: tool.name,
+                network: tool.network + ' (Recurring SaaS Partner)',
+                priceFormatted: formatPrice(tool.priceUSD) + tool.billing,
+                url: tool.url,
+                icon: tool.icon
+            });
+        }
+
+        function populateAndShowModal({ title, network, priceFormatted, url, icon }) {
+            document.getElementById('modal-product-title').textContent = title;
+            document.getElementById('modal-network').textContent = network;
+            document.getElementById('modal-price').textContent = priceFormatted;
+            document.getElementById('modal-region').textContent = CURRENCY_CONFIG[currentCurrency].region;
+            document.getElementById('modal-affiliate-url').textContent = url;
+            document.getElementById('modal-direct-link').href = url;
+            document.getElementById('modal-icon').innerHTML = `<i class="fa-solid ${icon}"></i>`;
+            document.getElementById('copy-btn-text').textContent = 'Copy Link';
+
+            const modal = document.getElementById('redirect-modal');
+            const progress = document.getElementById('redirect-progress');
+            progress.style.width = '0%';
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            // Animate tracking simulation bar
+            setTimeout(() => {
+                progress.style.width = '100%';
+            }, 80);
+        }
+
+        function closeRedirectModal() {
+            const modal = document.getElementById('redirect-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function copyAffiliateLink() {
+            const urlText = document.getElementById('modal-affiliate-url').textContent;
+            const tempInput = document.createElement('input');
+            tempInput.value = urlText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            document.getElementById('copy-btn-text').textContent = 'Copied!';
+            showToast('Affiliate tracking URL copied to clipboard!');
+        }
+
+        // Admin / Link Manager Drawer Logic
+        function toggleAdminDrawer() {
+            const drawer = document.getElementById('admin-drawer');
+            if (drawer.classList.contains('hidden')) {
+                renderAdminList();
+                drawer.classList.remove('hidden');
+                drawer.classList.add('flex');
+            } else {
+                drawer.classList.add('hidden');
+                drawer.classList.remove('flex');
+            }
+        }
+
+        function renderAdminList() {
+            const list = document.getElementById('admin-product-list');
+            document.getElementById('admin-count').textContent = products.length;
+
+            list.innerHTML = products.map(p => `
+                <div class="flex items-center justify-between gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs">
+                    <div class="min-w-0 flex-1">
+                        <div class="font-bold text-slate-900 truncate">${p.name}</div>
+                        <div class="text-slate-500 truncate">${p.network} • $${p.priceUSD.toFixed(2)} USD</div>
+                        <div class="text-brand-600 font-mono text-[10px] truncate mt-0.5">${p.affiliateUrl}</div>
+                    </div>
+                    <button onclick="deleteProduct('${p.id}')" class="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors shrink-0" title="Remove Product">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function handleAddProduct(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('prod-name').value.trim();
+            const category = document.getElementById('prod-category').value;
+            const priceUSD = parseFloat(document.getElementById('prod-price').value);
+            const origPriceRaw = document.getElementById('prod-orig-price').value;
+            const origPriceUSD = origPriceRaw ? parseFloat(origPriceRaw) : null;
+            const network = document.getElementById('prod-network').value;
+            const affiliateUrl = document.getElementById('prod-url').value.trim();
+            const highlightsRaw = document.getElementById('prod-highlights').value.trim();
+
+            const highlights = highlightsRaw
+                ? highlightsRaw.split(',').map(s => s.trim()).filter(Boolean)
+                : ['Official Global Partner Deal', 'Verified Fast Shipping', 'Best Price Guarantee'];
+
+            const categoryIcons = {
+                'Tech & Gadgets': 'fa-microchip',
+                'SaaS & AI Tools': 'fa-cloud-bolt',
+                'Home & Lifestyle': 'fa-couch',
+                'Fitness': 'fa-dumbbell'
+            };
+
+            const newProduct = {
+                id: 'prod-' + Date.now(),
+                name,
+                category,
+                priceUSD,
+                origPriceUSD,
+                rating: 4.9,
+                reviews: Math.floor(Math.random() * 4000) + 500,
+                network,
+                affiliateUrl,
+                icon: categoryIcons[category] || 'fa-tag',
+                badge: origPriceUSD && origPriceUSD > priceUSD
+                    ? `${Math.round(((origPriceUSD - priceUSD) / origPriceUSD) * 100)}% OFF • New`
+                    : 'Featured Partner Deal',
+                highlights
+            };
+
+            products.unshift(newProduct);
+            saveProductsToStorage();
+            renderProducts();
+            renderAdminList();
+
+            document.getElementById('add-product-form').reset();
+            showToast('New affiliate deal published live!');
+        }
+
+        function deleteProduct(id) {
+            products = products.filter(p => p.id !== id);
+            saveProductsToStorage();
+            renderProducts();
+            renderAdminList();
+            showToast('Affiliate listing removed.');
+        }
+
+        function resetDefaultProducts() {
+            products = [...DEFAULT_PRODUCTS];
+            saveProductsToStorage();
+            renderProducts();
+            renderAdminList();
+            showToast('Restored default international deals.');
+        }
+
+        function saveProductsToStorage() {
+            try {
+                localStorage.setItem('primepicks_affiliate_products', JSON.stringify(products));
+            } catch (e) {
+                console.warn('localStorage unavailable:', e);
+            }
+        }
+
+        // Toast Helper
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = message;
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 3000);
+        }
+
+        // Close modals on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeRedirectModal();
+                const drawer = document.getElementById('admin-drawer');
+                if (!drawer.classList.contains('hidden')) toggleAdminDrawer();
+            }
+        });
+
+        // Initial Render on Page Load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            renderSaasTable();
+        });
+    </script>
+</body>
+</html>
+```
